@@ -1,12 +1,19 @@
 import { AppProps } from "$fresh/server.ts";
+import { JSXSEO } from "https://deno.land/x/jsx_seo@stable/seo.tsx";
 
 export default function App({ Component }: AppProps) {
   return (
     <html>
-      <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>tokutei-v3</title>
+      <head lang="ja">
+        <JSXSEO
+          title="住所特定ツール　v3"
+          description="次世代型住所特定ツール"
+          icon="/logo.svg"
+          url="https://tokutei.ame-x.net"
+          ogp={{
+            type: "website"
+          }}
+        />
       </head>
       <body>
         <Component />

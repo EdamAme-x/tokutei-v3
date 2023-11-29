@@ -421,6 +421,8 @@
     "https://deno.land/x/hono@v3.10.3/validator/validator.ts": "f6139f0b6eb2040bc9f7ed4148905d5affc898235952772b2d6585fdae8d4731",
     "https://deno.land/x/importmap@0.2.1/_util.ts": "ada9a9618b537e6c0316c048a898352396c882b9f2de38aba18fd3f2950ede89",
     "https://deno.land/x/importmap@0.2.1/mod.ts": "ae3d1cd7eabd18c01a4960d57db471126b020f23b37ef14e1359bbb949227ade",
+    "https://deno.land/x/jsx_seo@6/seo.tsx": "05fdb4d5511d37169ab12eeb6674829b29864adfd352c7ffa6bf6250dbafcdf4",
+    "https://deno.land/x/jsx_seo@stable/seo.tsx": "219254f09f4ff70fb8bb11ee155168708e201fe88914bdd800a18d0a45641458",
     "https://deno.land/x/media_types@v2.10.2/db.ts": "d5ecfa410b570874a648aa12bac90d9c6704dc75f1e8c03b8cac97dd02b003ce",
     "https://deno.land/x/media_types@v2.10.2/deps.ts": "adc4e59af148fe5a49087932536cdf24a7027daa16498c2983124e3ec4d90c20",
     "https://deno.land/x/media_types@v2.10.2/mod.ts": "d63583b978d32eff8b76e1ae5d83cba2fb27baa90cc1bcb0ad15a06122ea8c19",
