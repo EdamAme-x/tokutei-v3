@@ -9,7 +9,7 @@ export default function App({ Component }: AppProps) {
           title="住所特定ツール　v3"
           description="次世代型住所特定ツール"
           icon="/logo.svg"
-          url="https://tokutei.ame-x.net"
+          url="https://tokutei.deno.dev"
           ogp={{
             type: "website"
           }}
