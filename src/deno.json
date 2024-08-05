@@ -1,0 +1,15 @@
+{
+    "tasks": {
+        "deno:dev": "deno run -A npm:astro dev",
+        "deno:start": "deno run -A npm:astro dev",
+        "deno:build": "deno run -A npm:astro build",
+        "deno:preview": "deno run -A npm:astro preview",
+        "deno:check": "deno run -A npm:astro check",
+        "deno:deploy": "deno run -A npm:astro deploy"
+    },
+    "unstable": [
+        "kv",
+        "byonm",
+        "sloppy-imports"
+    ]
+}

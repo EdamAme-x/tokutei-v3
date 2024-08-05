@@ -1,6 +1,0 @@
-.env
-.replit
-replit.nix
-.deno
-# Fresh build directory
-_fresh/
