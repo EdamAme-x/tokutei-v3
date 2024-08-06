@@ -14,10 +14,7 @@ export default defineConfig({
     },
   },
   output: "server",
-  adapter: deno({
-    start: false,
-    port: 8080
-  }),
+  adapter: deno(),
   optimizeDeps: { exclude: ["fsevents"] },
   build: {
     minify: true,

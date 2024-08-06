@@ -1,0 +1,31 @@
+name: Deploy
+on: [push]
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read 
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: npm ci
+        with:
+          root: src
+
+      - name: Build Astro
+        run: npm run build
+        with:
+          root: src
+
+      - name: Upload to Deno Deploy
+        uses: denoland/deployctl@v1
+        with:
+          project: tokutei-v3
+          entrypoint: server/entry.mjs
+          root: src/dist
