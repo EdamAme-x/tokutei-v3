@@ -7,6 +7,7 @@ import {
   LoaderIcon,
   LogIn,
   LogOut,
+  Pencil,
   Pickaxe,
   Settings2,
   ShieldQuestionIcon,
@@ -25,7 +26,7 @@ import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { createKey } from "@/lib/createKey";
 import { Button } from "@/components/ui/button.tsx";
 import { Input } from "@/components/ui/input.tsx";
-import { Toaster } from "@/components/ui/toaster.tsx"
+import { Toaster } from "@/components/ui/toaster.tsx";
 
 export function Dashboard({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
@@ -47,13 +48,13 @@ export function Dashboard({ children }: { children: React.ReactNode }) {
       )}
     >
       <Sidebar open={open} setOpen={setOpen} animate={true}>
-        <SidebarBody className="justify-between gap-10">
+        <SidebarBody className="justify-between gap-2">
           <div className="flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
             <>
               <Logo />
             </>
             <div
-              className={"mt-8 flex flex-col items-center gap-2"}
+              className={"mt-8 h-full flex flex-col items-center gap-2"}
             >
               <SidebarLinks
                 setOpen={setOpen}
@@ -113,7 +114,7 @@ const SidebarLinks = (
           "flex items-center justify-start gap-2  group/sidebar py-2",
         )}
       >
-        <Pickaxe className="text-neutral-900 dark:text-neutral-200 h-6 w-6 flex-shrink-0" />
+        <Pencil className="text-neutral-900 dark:text-neutral-200 h-6 w-6 flex-shrink-0" />
         <motion.span
           animate={{
             display: open ? "inline-block" : "none",
@@ -434,8 +435,29 @@ export const Logo = () => {
 const DashboardContainer = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="flex flex-1">
-      <div className="p-2 ounded-tl-2xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 flex flex-col gap-2 flex-1 w-full min-h-screen overflow-y-auto">
+      <div className="rounded-tl-2xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 flex flex-col flex-1 w-full h-screen overflow-y-auto">
         {children}
+        <div className="flex flex-col gap-2 justify-center items-end p-2">
+          <p className="text-neutral-500 font-regular inline-flex gap-1">
+            <Pickaxe className="h-4 w-4 my-auto" />
+            Powered by{" "}
+            <a
+              href="https://github.com/EdamAme-x"
+              className="text-yellow-500"
+              target="_blank"
+            >
+              @EdamAme-x
+            </a>
+            and
+            <a
+              href="https://evex.land"
+              className="text-emerald-500"
+              target="_blank"
+            >
+              Evex
+            </a>
+          </p>
+        </div>
       </div>
     </div>
   );
