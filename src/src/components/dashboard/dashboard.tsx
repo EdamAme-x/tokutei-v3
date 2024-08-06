@@ -223,17 +223,19 @@ const Login = (
 
   return (
     <Dialog>
-      <DialogTrigger onClick={() => {
-        if (isNoDialog()) {
-          const key = window.prompt("鍵を入力してください");
-          if (key && /^[a-z0-9]{32}$/.test(key)) {
-            localStorage.setItem("key", key);
-          }else {
-            window.alert("正しい鍵を入力してください");
+      <DialogTrigger
+        onClick={() => {
+          if (isNoDialog()) {
+            const key = window.prompt("鍵を入力してください");
+            if (key && /^[a-z0-9]{32}$/.test(key)) {
+              localStorage.setItem("key", key);
+            } else {
+              window.alert("正しい鍵を入力してください");
+            }
+            setOpen(false);
           }
-          setOpen(false);
-        }       
-      }}>
+        }}
+      >
         <button
           className={cn(
             "flex items-center justify-start gap-2  group/sidebar py-2",
@@ -298,15 +300,17 @@ const Logout = (
 ) => {
   return (
     <Dialog>
-      <DialogTrigger onClick={() => {
-        if (isNoDialog()) {
-          const confirm = window.confirm("ログアウトしますか？");
-          if (confirm) {
-            localStorage.removeItem("key");
-            setOpen(false);
+      <DialogTrigger
+        onClick={() => {
+          if (isNoDialog()) {
+            const confirm = window.confirm("ログアウトしますか？");
+            if (confirm) {
+              localStorage.removeItem("key");
+              setOpen(false);
+            }
           }
-        }
-      }}>
+        }}
+      >
         <button
           className={cn(
             "flex items-center justify-start gap-2  group/sidebar py-2",
@@ -362,7 +366,9 @@ const Setting = (
       <DialogTrigger
         onClick={() => {
           if (isNoDialog()) {
-            alert(`鍵: ${localStorage.getItem("key") || "ログインしていません"}`);
+            alert(
+              `鍵: ${localStorage.getItem("key") || "ログインしていません"}`,
+            );
           }
         }}
       >
