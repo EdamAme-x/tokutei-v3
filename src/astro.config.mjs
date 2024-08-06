@@ -18,6 +18,6 @@ export default defineConfig({
   optimizeDeps: { exclude: ["fsevents"] },
   build: {
     minify: true,
-    platform: "node",
+    target: "esnext",
   }
 });
