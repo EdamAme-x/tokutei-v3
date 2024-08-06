@@ -14,14 +14,12 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install dependencies
+        working-directory: src
         run: npm ci
-        with:
-          root: src
 
       - name: Build Astro
+        working-directory: src
         run: npm run build
-        with:
-          root: src
 
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
