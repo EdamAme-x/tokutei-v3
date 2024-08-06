@@ -25,6 +25,7 @@ import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { createKey } from "@/lib/createKey";
 import { Button } from "@/components/ui/button.tsx";
 import { Input } from "@/components/ui/input.tsx";
+import { Toaster } from "@/components/ui/toaster.tsx"
 
 export function Dashboard({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
@@ -92,6 +93,7 @@ export function Dashboard({ children }: { children: React.ReactNode }) {
       <DashboardContainer>
         {children}
       </DashboardContainer>
+      <Toaster />
     </div>
   );
 }
@@ -432,7 +434,7 @@ export const Logo = () => {
 const DashboardContainer = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="flex flex-1">
-      <div className="p-2 ounded-tl-2xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 flex flex-col gap-2 flex-1 w-full h-full">
+      <div className="p-2 ounded-tl-2xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 flex flex-col gap-2 flex-1 w-full min-h-screen overflow-y-auto">
         {children}
       </div>
     </div>

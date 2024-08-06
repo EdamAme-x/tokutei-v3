@@ -8,6 +8,6 @@
     },
     "jsx": "react-jsx",
     "jsxImportSource": "react",
-    "lib": ["DOM"]
+    "lib": ["DOM", "DOM.Iterable", "DOM.AsyncIterable", "ESNext"]
   }
 }
