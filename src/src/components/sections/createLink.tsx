@@ -32,10 +32,11 @@ export function CreateLink() {
   });
 
   return (
-    <div className="w-full h-full md:min-h-[90vh] flex flex-wrap justify-between gap-y-2 p-2">
+    <div className="w-full h-full md:h-[95vh] flex flex-wrap flex-1 justify-between gap-y-2 p-2">
       <Create config={config} setConfig={setConfig} />
       <Preview config={config} setConfig={setConfig} />
       <Webhook config={config} setConfig={setConfig} />
+      <Experimental />
     </div>
   );
 }
@@ -48,9 +49,15 @@ const Create = (
 ) => {
   const { toast } = useToast();
 
+  const createLink = async () => {
+    toast({
+      
+    })
+  }
+
   return (
     <div className="w-full md:w-[49.75%] h-3/5 bg-[#121212] border border-white/[0.2] rounded-xl">
-      <div className="min-w-[75px] w-[15%] h-[12%] flex justify-center items-center bg-[#161616] rounded-tl-xl border border-white/[0.2]">
+      <div className="min-w-[75px] w-[15%] h-[12%] flex justify-center items-center rounded-tl-xl border border-white/[0.2]">
         作成
       </div>
       <div className="w-full h-full flex flex-col py-5 px-2 gap-2">
@@ -68,8 +75,22 @@ const Create = (
             <Switch
               id="fake-preview"
               checked={config.fakePreview}
-              onCheckedChange={() =>
-                setConfig({ ...config, fakePreview: !config.fakePreview })}
+              onCheckedChange={() => {
+                if (
+                  (config.fakePreviewContext.title !== "" ||
+                    config.fakePreviewContext.description !== "" ||
+                    config.fakePreviewContext.image !== "") ||
+                  config.fakePreview
+                ) {
+                  setConfig({ ...config, fakePreview: !config.fakePreview });
+                } else {
+                  toast({
+                    title: "エラー",
+                    description:
+                      "タイトル、説明、画像のいずれかを正しく入力してください",
+                  });
+                }
+              }}
             />
             <Label htmlFor="fake-preview pb-1">プレビュー偽造</Label>
           </div>
@@ -78,20 +99,20 @@ const Create = (
               id="webhook"
               checked={config.webhook}
               onCheckedChange={() => {
-                if (WEBHOOK_REGEX.test(config.webhookURL) || config.webhook ) {
-                  setConfig({ ...config, webhook: !config.webhook })
-                }else{
+                if (WEBHOOK_REGEX.test(config.webhookURL) || config.webhook) {
+                  setConfig({ ...config, webhook: !config.webhook });
+                } else {
                   toast({
                     title: "エラー",
                     description: "WebhookのURLを正しく入力してください",
-                  })
+                  });
                 }
               }}
             />
             <Label htmlFor="webhook pb-1">Webhook連携</Label>
           </div>
         </div>
-        <Button variant="outline">リンク作成</Button>
+        <Button variant="outline" onClick={() => createLink()} className="mt-2">リンク作成</Button>
       </div>
     </div>
   );
@@ -142,7 +163,7 @@ const Preview = (
 
   return (
     <div className="w-full md:w-[49.75%] h-3/5 bg-[#121212] border border-white/[0.2] rounded-xl">
-      <div className="min-w-[150px] w-[25%] md:w-[20%] h-[12%] flex justify-center items-center bg-[#161616] rounded-tl-xl border border-white/[0.2]">
+      <div className="min-w-[150px] w-[25%] md:w-[20%] h-[12%] flex justify-center items-center rounded-tl-xl border border-white/[0.2]">
         プレビュー偽造
       </div>
       <div className="w-full h-full flex flex-col py-5 px-2 gap-2">
@@ -222,8 +243,7 @@ const Preview = (
   );
 };
 
-const WEBHOOK_REGEX =
-  /https?:\/\/.+\..+/;
+const WEBHOOK_REGEX = /https?:\/\/.+\..+/;
 
 const Webhook = (
   { config, setConfig }: {
@@ -233,7 +253,7 @@ const Webhook = (
 ) => {
   return (
     <div className="w-full md:w-[49.75%] h-2/5 bg-[#121212] border border-white/[0.2] rounded-xl">
-      <div className="min-w-[150px] w-[15%] md:w-[17.5%] h-[18%] flex justify-center items-center bg-[#161616] rounded-tl-xl border border-white/[0.2]">
+      <div className="min-w-[150px] w-[15%] md:w-[17.5%] h-[18%] flex justify-center items-center rounded-tl-xl border border-white/[0.2]">
         Webhook
       </div>
       <div className="w-full h-full flex flex-col py-5 px-2 gap-2">
@@ -250,7 +270,19 @@ const Webhook = (
             : "text-red-500"}
         />
         <div className="w-full flex flex-col gap-y-1 bg-[#121212] border border-white/[0.2] rounded-md m-1 py-1 px-3 font-regular text-sm">
-          {"POST / { content: 'this is result.' }"}
+          Method: POST / Body: {"{\"content\": \"result\"}"}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const Experimental = () => {
+  return (
+    <div className="w-full md:w-[49.75%] h-2/5 bg-[#121212] border border-white/[0.2] rounded-xl">
+      <div className="w-full h-full flex flex-col justify-center items-center py-2 px-2 gap-2">
+        <div className="font-regular text-sm text-neutral-400 border border-white/[0.2] rounded-md py-1 px-3">
+          近日公開
         </div>
       </div>
     </div>

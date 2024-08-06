@@ -43,8 +43,8 @@ export function Dashboard({ children }: { children: React.ReactNode }) {
   return (
     <div
       className={cn(
-        "rounded-md flex flex-col md:flex-row bg-gray-100 dark:bg-neutral-800 w-full flex-1 max-w-7xl mx-auto border border-neutral-200 dark:border-neutral-700 overflow-hidden",
-        "h-screen",
+        "rounded-md flex flex-col md:flex-row bg-gray-100 dark:bg-neutral-800 w-full flex-1 max-w-7xl mx-auto border border-neutral-200 dark:border-neutral-700 overflow-x-hidden",
+        "md:h-screen",
       )}
     >
       <Sidebar open={open} setOpen={setOpen} animate={true}>
@@ -88,6 +88,26 @@ export function Dashboard({ children }: { children: React.ReactNode }) {
                   : "匿名ユーザー"}
               </motion.span>
             )}
+          </div>
+          <div className="flex md:hidden flex-col gap-2 justify-center items-center p-2">
+            <p className="text-neutral-500 font-regular inline-flex gap-1">
+              Powered by
+              <a
+                href="https://github.com/EdamAme-x"
+                className="text-yellow-500"
+                target="_blank"
+              >
+                EdamAme-x
+              </a>
+              &
+              <a
+                href="https://evex.land"
+                className="text-emerald-500"
+                target="_blank"
+              >
+                Evex
+              </a>
+            </p>
           </div>
         </SidebarBody>
       </Sidebar>
@@ -435,9 +455,9 @@ export const Logo = () => {
 const DashboardContainer = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="flex flex-1">
-      <div className="rounded-tl-2xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 flex flex-col flex-1 w-full h-screen overflow-y-auto">
+      <div className="rounded-tl-2xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 flex flex-col flex-1 w-full overflow-y-auto">
         {children}
-        <div className="flex flex-col gap-2 justify-center items-end p-2">
+        <div className="hidden md:flex flex-col gap-2 justify-center items-end p-2">
           <p className="text-neutral-500 font-regular inline-flex gap-1">
             <Pickaxe className="h-4 w-4 my-auto" />
             Powered by{" "}
