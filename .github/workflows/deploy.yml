@@ -26,6 +26,6 @@ jobs:
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
         with:
-          project: tokutei-v3
+          project: tokutei-v3-web
           entrypoint: server/entry.mjs
           root: src/dist
