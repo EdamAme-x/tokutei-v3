@@ -1,0 +1,11 @@
+---
+import Layout from "@/components/layouts/layout.astro";
+import { Dashboard } from "@/components/dashboard/dashboard";
+import { CreateLink } from "@/components/sections/createLink";
+
+---
+<Layout>
+  <Dashboard client:load>
+    <CreateLink />
+  </Dashboard>
+</Layout>

@@ -1,3 +1,3 @@
-export function createToken() {
+export function createKey() {
   return crypto.randomUUID().replace(/-/g, "");
 }

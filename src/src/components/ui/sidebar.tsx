@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import React, { createContext, useContext, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { MenuIcon, X } from "lucide-react";
-import { Logo } from "@/components/dashboard.tsx";
+import { Logo } from "@/components/dashboard/dashboard";
 
 interface Links {
   label: string;

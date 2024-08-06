@@ -1,8 +1,3 @@
 ---
-import Layout from "@/components/layouts/layout.astro";
-import { Dashboard } from "@/components/dashboard";
-
+return Astro.redirect("/create", 302);
 ---
-<Layout>
-  <Dashboard client:load />
-</Layout>
