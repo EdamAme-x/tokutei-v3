@@ -2,7 +2,9 @@ import { Hono } from "hono";
 import { bodyLimit } from "hono/body-limit";
 import { validator } from "hono/validator";
 import { JSDOM } from "jsdom";
-import { _Deno } from "./_deno";
+import { _Deno } from "./_deno.ts";
+import { ConfigSchema } from './zod-schema.ts';
+import { sha256 } from "js-sha256";
 
 const app = new Hono({
   strict: false,
@@ -10,7 +12,8 @@ const app = new Hono({
 
 const kv = await _Deno.openKv();
 
-const linkKey = "link";
+const LINK_KEY = "link";
+const HISTORY_KEY = "history";
 
 app.use(bodyLimit({
   maxSize: 128 * 1024,
@@ -111,7 +114,30 @@ const routes = app
         image,
       }, 200);
     },
-  ).post()
+  ).post(
+    "/create",
+    async (c) => {
+      const config = await c.req.json();
+
+      const result = ConfigSchema.safeParse(config);
+      if (!result.success) {
+        return c.json({
+          error: result.error.issues
+        }, 400);
+      }
+
+      const shortId = sha256(config.key + crypto.randomUUID()).slice(0, 10);
+      await kv.set([LINK_KEY, shortId], config);
+      await kv.set([HISTORY_KEY, config.key, shortId], {
+        config,
+        accessHistory: [],
+      })
+
+      return c.json({
+        shortId
+      }, 201);
+    }
+  );
 
 export { app as serverHandler };
 export type RouteType = typeof routes;

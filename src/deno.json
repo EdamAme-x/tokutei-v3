@@ -9,8 +9,7 @@
   },
   "unstable": [
     "kv",
-    "byonm",
-    "sloppy-imports"
+    "byonm"
   ],
   "imports": {
     "@/": "./src/"
@@ -20,7 +19,8 @@
     "jsxImportSource": "react",
     "lib": [
       "deno.window",
-      "deno.dom"
+      "deno.dom",
+      "deno.unstable"
     ]
   }
 }

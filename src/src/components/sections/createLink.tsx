@@ -2,21 +2,14 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button.tsx";
 import { Input } from "@/components/ui/input.tsx";
 import { Label } from "@/components/ui/label.tsx";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/components/ui/use-toast.ts";
 import { Switch } from "@/components/ui/switch.tsx";
-import { client } from "@/backend/client";
+import { client } from "@/backend/client.ts";
+import { z } from "zod";
+import { ConfigSchema } from "@/backend/zod-schema.ts";
+import { createKey } from '@/lib/createKey.ts';
 
-interface Config {
-  redirect: string;
-  fakePreview: boolean;
-  fakePreviewContext: {
-    title: string;
-    description: string;
-    image: string;
-  };
-  webhook: boolean;
-  webhookURL: string;
-}
+type Config = z.infer<typeof ConfigSchema>;
 
 export function CreateLink() {
   const [config, setConfig] = useState<Config>({
@@ -29,6 +22,7 @@ export function CreateLink() {
     },
     webhook: false,
     webhookURL: "",
+    key: "",
   });
 
   return (
@@ -48,12 +42,36 @@ const Create = (
   },
 ) => {
   const { toast } = useToast();
+  const [shortId, setShortId] = useState("");
 
   const createLink = async () => {
     toast({
-      
+      title: "リンク作成中",
+      description: "リンクを作成しています",
+    });
+
+    const response = await client.api.create.$post({
+      json: {
+        ...config,
+        key: localStorage.getItem("key") || createKey(),
+      },
     })
-  }
+
+    if (response.status === 400) {
+      toast({
+        title: "リンク作成失敗",
+        description: (await response.json()).error[0].message,
+      });
+      return;
+    }else {
+      toast({
+        title: "リンク作成完了",
+        description: "リンクを作成しました",
+      });
+
+      setShortId((await response.json()).shortId);
+    }
+  };
 
   return (
     <div className="w-full md:w-[49.75%] h-3/5 bg-[#121212] border border-white/[0.2] rounded-xl">
@@ -112,7 +130,14 @@ const Create = (
             <Label htmlFor="webhook pb-1">Webhook連携</Label>
           </div>
         </div>
-        <Button variant="outline" onClick={() => createLink()} className="mt-2">リンク作成</Button>
+        <Button variant="outline" onClick={() => createLink()} className="mt-2">
+          リンク作成
+        </Button>
+        {shortId !== "" && (
+          <div className="w-full flex justify-center items-center">
+            {window.location.origin}/r/{shortId}
+          </div>
+        )}
       </div>
     </div>
   );
@@ -270,7 +295,7 @@ const Webhook = (
             : "text-red-500"}
         />
         <div className="w-full flex flex-col gap-y-1 bg-[#121212] border border-white/[0.2] rounded-md m-1 py-1 px-3 font-regular text-sm">
-          Method: POST / Body: {"{\"content\": \"result\"}"}
+          Method: POST / Body: {'{"content": "result"}'}
         </div>
       </div>
     </div>

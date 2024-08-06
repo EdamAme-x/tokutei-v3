@@ -1,7 +1,6 @@
-export const _Deno = typeof globalThis.Deno === "undefined"
-  ? {
-    openKv() {
-      return null;
-    },
-  } as unknown as typeof globalThis.Deno
-  : globalThis.Deno;
+import { openKv } from "@deno/kv";
+
+export const _Deno = {
+  // @ts-expect-error NO TYPED
+  openKv: typeof Deno === "undefined" ? openKv : Deno
+}

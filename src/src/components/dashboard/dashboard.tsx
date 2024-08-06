@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Sidebar, SidebarBody } from "@/components/ui/sidebar";
-import { cn } from "@/lib/utils";
+import { Sidebar, SidebarBody } from "@/components/ui/sidebar.tsx";
+import { cn } from "@/lib/utils.ts";
 import {
   CheckIcon,
   History,
@@ -21,9 +21,9 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
+} from "@/components/ui/dialog.tsx";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
-import { createKey } from "@/lib/createKey";
+import { createKey } from "@/lib/createKey.ts";
 import { Button } from "@/components/ui/button.tsx";
 import { Input } from "@/components/ui/input.tsx";
 import { Toaster } from "@/components/ui/toaster.tsx";
@@ -484,6 +484,5 @@ const DashboardContainer = ({ children }: { children: React.ReactNode }) => {
 };
 
 function isNoDialog() {
-  // @ts-expect-error: NOT TYPE WELL
   return window.innerWidth < 764;
 }
